@@ -2,5 +2,154 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "ng-colorpicker-demo": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ng-colorpicker-demo",
+      "sourceRoot": "projects/ng-colorpicker-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng-colorpicker-demo",
+            "index": "projects/ng-colorpicker-demo/src/index.html",
+            "main": "projects/ng-colorpicker-demo/src/main.ts",
+            "polyfills": "projects/ng-colorpicker-demo/src/polyfills.ts",
+            "tsConfig": "projects/ng-colorpicker-demo/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/ng-colorpicker-demo/src/favicon.ico",
+              "projects/ng-colorpicker-demo/src/assets"
+            ],
+            "styles": [
+              "projects/ng-colorpicker-demo/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ng-colorpicker-demo/src/environments/environment.ts",
+                  "with": "projects/ng-colorpicker-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ng-colorpicker-demo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-colorpicker-demo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-colorpicker-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-colorpicker-demo/src/test.ts",
+            "polyfills": "projects/ng-colorpicker-demo/src/polyfills.ts",
+            "tsConfig": "projects/ng-colorpicker-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-colorpicker-demo/karma.conf.js",
+            "assets": [
+              "projects/ng-colorpicker-demo/src/favicon.ico",
+              "projects/ng-colorpicker-demo/src/assets"
+            ],
+            "styles": [
+              "projects/ng-colorpicker-demo/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-colorpicker-demo/tsconfig.app.json",
+              "projects/ng-colorpicker-demo/tsconfig.spec.json",
+              "projects/ng-colorpicker-demo/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ng-colorpicker-demo/e2e/protractor.conf.js",
+            "devServerTarget": "ng-colorpicker-demo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-colorpicker-demo:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "colorpicker": {
+      "projectType": "library",
+      "root": "projects/colorpicker",
+      "sourceRoot": "projects/colorpicker/src",
+      "prefix": "ng",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/colorpicker/tsconfig.lib.json",
+            "project": "projects/colorpicker/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/colorpicker/src/test.ts",
+            "tsConfig": "projects/colorpicker/tsconfig.spec.json",
+            "karmaConfig": "projects/colorpicker/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/colorpicker/tsconfig.lib.json",
+              "projects/colorpicker/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "defaultProject": "ng-colorpicker-demo"
 }
